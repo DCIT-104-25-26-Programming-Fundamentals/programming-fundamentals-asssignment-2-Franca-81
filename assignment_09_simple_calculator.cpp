@@ -73,3 +73,67 @@
 #include <cmath>
 using namespace std;
 
+int main()
+{
+int choice;
+  cout << fixed << setprecision(2);
+do
+{
+cout << "\n============================\n";
+cout << " SIMPLE CALCULATOR\n";
+cout << "============================\n";
+cout << "1. Addition\n";
+cout << "2. Subtraction\n";
+cout << "3. Multiplication\n";
+cout << "4. Division\n";
+cout << "5. Modulus\n";
+cout << "6. Exponentiation\n";
+cout << "7. Quit\n";
+cout << "Select an operation (1-7): ";
+cin >> choice;
+if (choice >= 1 && choice <= 6)
+{
+double num1, num2;
+cout << "Enter first number: ";
+cin >> num1;
+cout << "Enter second number: ";
+cin >> num2;
+switch (choice)
+{
+case 1:
+cout << "Result = " << num1 + num2 << endl;
+break;
+case 2:
+cout << "Result = " << num1 - num2 << endl;
+break;
+case 3:
+cout << "Result = " << num1 * num2 << endl;
+break;
+case 4:
+if (num2 != 0)
+cout << "Result = " << num1 / num2 << endl;
+else
+cout << "Error: Division by zero is not allowed.\n";
+break;
+case 5:
+if ((int)num2 != 0)
+cout << "Result = " << (int)num1 % (int)num2 << endl;
+else
+cout << "Error: Modulus by zero is not allowed.\n";
+break;
+case 6:
+cout << "Result = " << pow(num1, num2) << endl;
+break;
+}
+}
+else if (choice == 7)
+{
+cout << "Goodbye!\n";
+}
+else
+{
+cout << "Invalid choice. Please select between 1 and 7.\n";
+}
+} while (choice != 7);
+return 0;
+}
