@@ -83,3 +83,103 @@
 #include <iomanip>
 using namespace std;
 
+struct Student {
+string name;
+int id;
+vector<double> scores;
+};
+double calculateAverage(const Student& student) {
+if (student.scores.empty()) {
+return 0.0;
+}
+double sum = 0;
+for (double score : student.scores) {
+sum += score;
+}
+return sum / student.scores.size();
+}
+void addStudent(vector<Student>& students) {
+Student student;
+cin.ignore();
+cout << "Enter student name: ";
+getline(cin, student.name);
+cout << "Enter student ID: ";
+cin >> student.id;
+int numScores;
+cout << "How many scores? ";
+cin >> numScores;
+for (int i = 0; i < numScores; i++) {
+double score;
+cout << "Enter score " << i + 1 << ": ";
+cin >> score;
+student.scores.push_back(score);
+}
+students.push_back(student);
+cout << "Student added successfully.\n";
+}
+void displayAllStudents(const vector<Student>& students) {
+if (students.empty()) {
+cout << "No students have been added yet.\n";
+return;
+}
+cout << "\nStudent Records\n";
+cout << "------------------------------------------------------------\n";
+for (const Student& student : students) {
+cout << "Name: " << student.name << endl;
+cout << "ID: " << student.id << endl;
+cout << "Scores: ";
+for (double score : student.scores) {
+cout << score << " ";
+}
+cout << endl;
+cout << "Average: "
+<< fixed << setprecision(2)
+<< calculateAverage(student) << endl;
+cout << "------------------------------------------------------------\n";
+}
+}
+void findStudentAverage(const vector<Student>& students) {
+int searchId;
+cout << "Enter student ID: ";
+cin >> searchId;
+for (const Student& student : students) {
+if (student.id == searchId) {
+cout << "Average score for "
+<< student.name << ": "
+<< fixed << setprecision(2)
+<< calculateAverage(student) << endl;
+return;
+}
+}
+cout << "Student ID not found.\n";
+}
+int main() {
+vector<Student> students;
+int choice;
+do {
+cout << "\n===== Student Record Management System =====\n";
+cout << "1. Add a Student\n";
+cout << "2. Display All Students\n";
+cout << "3. Calculate Average Score for a Specific Student\n";
+cout << "4. Quit\n";
+cout << "Enter your choice: ";
+cin >> choice;
+switch (choice) {
+case 1:
+addStudent(students);
+break;
+case 2:
+displayAllStudents(students);
+break;
+case 3:
+findStudentAverage(students);
+break;
+case 4:
+cout << "Goodbye!\n";
+break;
+default:
+cout << "Invalid choice. Try again.\n";
+}
+} while (choice != 4);
+return 0;
+}
